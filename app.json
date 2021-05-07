@@ -1,0 +1,12 @@
+{
+  "name": "pictures-everywhere",
+  "displayName": "pictures-everywhere",
+  "expo": {
+    "name": "pictures-everywhere",
+    "slug": "pictures-everywhere",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

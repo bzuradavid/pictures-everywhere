@@ -1,5 +1,6 @@
 const main = () => ({
-  headerTitle: "Pictures everywhere!",
+  headerTitle: "PicTrackr",
+  headerTitleAlign: "center",
 });
 
 export const options = {

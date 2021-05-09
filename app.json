@@ -2,10 +2,6 @@
   "name": "pictures-everywhere",
   "displayName": "pictures-everywhere",
   "expo": {
-    "splash": {
-      "image": "./src/assets/splash.png",
-      "resizeMode": "cover"
-    },
     "name": "pictures-everywhere",
     "slug": "pictures-everywhere",
     "version": "1.0.0",

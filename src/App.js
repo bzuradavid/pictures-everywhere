@@ -5,6 +5,8 @@ import * as SplashScreen from "expo-splash-screen";
 
 import { options } from "./utils/screenOptions";
 import MainScreen from "./screens/Main";
+import PictureScreen from "./screens/Picture";
+import TakePictureScreen from "./screens/TakePicture";
 
 const Stack = createStackNavigator();
 SplashScreen.preventAutoHideAsync();
@@ -23,6 +25,16 @@ export default function App() {
           name="Main"
           options={options.main}
           component={MainScreen}
+        />
+        <Stack.Screen
+          name="Picture"
+          options={options.picture}
+          component={PictureScreen}
+        />
+        <Stack.Screen
+          name="TakePicture"
+          options={options.takePicture}
+          component={TakePictureScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

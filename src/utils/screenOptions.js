@@ -3,6 +3,16 @@ const main = () => ({
   headerTitleAlign: "center",
 });
 
+const picture = () => ({
+  headerTitle: "",
+});
+
+const takePicture = () => ({
+  headerTitle: "",
+});
+
 export const options = {
   main,
+  picture,
+  takePicture,
 };

@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { Text, ScrollView, Image, Dimensions } from "react-native";
+import React from "react";
+import { View } from "react-native";
+
+import { useAppContext } from "../../context";
+import Camera from "../../components/Camera";
 import { styles } from "./styles";
 
-const TakePictureScreen = () => {
-  const [height, setHeight] = useState();
+const TakePictureScreen = ({ navigation }) => {
+  const { savePicture } = useAppContext();
 
-  useEffect(() => {}, []);
+  const setCapturedPicture = ({ base64 }) => {
+    savePicture(base64);
+    navigation.navigate("Main");
+  };
 
   return (
-    <ScrollView style={styles.container}>
-      <Image style={{ height }} source={{ uri: file }} />
-      <Text style={styles.location}>{location}</Text>
-    </ScrollView>
+    <View style={styles.container}>
+      <Camera setCapturedPicture={setCapturedPicture} />
+    </View>
   );
 };
 

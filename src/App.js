@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as SplashScreen from "expo-splash-screen";
 
 import { options } from "./utils/screenOptions";
+import { AppProvider } from "./context";
 import MainScreen from "./screens/Main";
 import PictureScreen from "./screens/Picture";
 import TakePictureScreen from "./screens/TakePicture";
@@ -19,24 +20,26 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Main"
-          options={options.main}
-          component={MainScreen}
-        />
-        <Stack.Screen
-          name="Picture"
-          options={options.picture}
-          component={PictureScreen}
-        />
-        <Stack.Screen
-          name="TakePicture"
-          options={options.takePicture}
-          component={TakePictureScreen}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Main"
+            options={options.main}
+            component={MainScreen}
+          />
+          <Stack.Screen
+            name="Picture"
+            options={options.picture}
+            component={PictureScreen}
+          />
+          <Stack.Screen
+            name="TakePicture"
+            options={options.takePicture}
+            component={TakePictureScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppProvider>
   );
 }

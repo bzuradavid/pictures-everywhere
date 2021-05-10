@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     padding: 15,
   },
   location: {
-    marginTop: 30,
+    paddingVertical: 30,
     textAlign: "center",
   },
 });

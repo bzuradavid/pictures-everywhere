@@ -16,16 +16,6 @@ export const Camera = ({ setCapturedPicture }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const camRef = useRef(null);
 
-  // useEffect(() => {
-  //   requestPermissions();
-  //   ExpoCamera.getPermissionsAsync()
-  //     .then(({ status }) => {
-  //       // if (status !== "granted")
-  //       setHasPermission(status === "granted");
-  //     })
-  //     .catch((err) => console.log("[Camera]: getPermissionsAsync error", err));
-  // }, []);
-
   useEffect(() => {
     (async () => {
       const { status } = await ExpoCamera.getPermissionsAsync();
@@ -38,12 +28,6 @@ export const Camera = ({ setCapturedPicture }) => {
     })();
   }, []);
 
-  const requestPermissions = () => {
-    ExpoCamera.requestPermissionsAsync()
-      .then(({ status }) => setHasPermission(status === "granted"))
-      .catch((err) => console.log("[Camera]: requestPermissions() error", err));
-  };
-
   const takePicture = async () => {
     try {
       if (camRef) {
@@ -51,6 +35,7 @@ export const Camera = ({ setCapturedPicture }) => {
           base64: true,
           skipProcessing: true,
           exif: false,
+          quality: 0.1,
         });
         setCapturedPicture(image);
       }

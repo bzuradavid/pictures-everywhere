@@ -1,21 +1,82 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
+import { Platform } from "react-native";
 import * as Location from "expo-location";
+import * as SQLite from "expo-sqlite";
 
 const AppContext = createContext(null);
+
+const openDatabase = () => {
+  if (Platform.OS === "web") {
+    return {
+      transaction: () => {
+        return {
+          executeSql: () => {},
+        };
+      },
+    };
+  }
+
+  const db = SQLite.openDatabase("pictures.db");
+  return db;
+};
+
+const db = openDatabase();
+
+console.log(db);
 
 export const AppProvider = ({ children }) => {
   const [pictures, setPictures] = useState([]);
 
+  useEffect(() => {
+    // console.log(pictures);
+  }, [pictures]);
+
+  useEffect(() => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "create table if not exists pictures (id integer primary key not null, file text, location text);"
+      );
+    });
+  }, []);
+
+  useEffect(() => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `select * from pictures;`,
+        [],
+        (_, { rows: { _array } }) => {
+          // console.log("PICTURES", _array);
+          setPictures(_array);
+        }
+      );
+    });
+  }, []);
+
   const savePicture = async (base64) => {
     const location = await getCurrentLocation();
-    setPictures([
-      ...pictures,
-      {
-        id: pictures.length,
-        file: `data:image/png;base64,${base64}`,
-        location,
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          "insert into pictures (id, file, location) values (?, ?, ?)",
+          [pictures.length, `data:image/png;base64,${base64}`, location],
+          null,
+          (transaction, result) => {
+            console.log("RESULT", transaction, result);
+          }
+        );
       },
-    ]);
+      null,
+      null
+    );
+    db.transaction((tx) => {
+      tx.executeSql(
+        `select * from pictures;`,
+        [],
+        (_, { rows: { _array } }) => {
+          setPictures(_array);
+        }
+      );
+    });
   };
 
   const getCurrentLocation = async () => {

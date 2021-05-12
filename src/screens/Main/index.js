@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Text,
   View,
   SafeAreaView,
   FlatList,
@@ -10,6 +9,7 @@ import {
 
 import * as Routes from "../../routes";
 import { useAppContext } from "../../context";
+import Button from "../../components/Button";
 import { styles } from "./styles";
 
 const MainScreen = ({ navigation: { navigate } }) => {
@@ -38,12 +38,10 @@ const MainScreen = ({ navigation: { navigate } }) => {
         )}
       />
       <View style={styles.takePictureButtonContainer}>
-        <TouchableOpacity
-          style={styles.takePictureButton}
-          onPress={() => navigate(Routes.TakePicture)}
-        >
-          <Text style={styles.takePictureText}>TAKE PICTURE</Text>
-        </TouchableOpacity>
+        <Button
+          title="TAKE PICTURE"
+          onButtonPress={() => navigate(Routes.TakePicture)}
+        />
       </View>
     </SafeAreaView>
   );

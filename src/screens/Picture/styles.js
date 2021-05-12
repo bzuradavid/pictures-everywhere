@@ -9,4 +9,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 30,
     textAlign: "center",
   },
+  sharePictureButtonContainer: {
+    alignItems: "center",
+  },
 });

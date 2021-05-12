@@ -8,10 +8,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import * as Routes from "../../routes";
 import { useAppContext } from "../../context";
 import { styles } from "./styles";
 
-const MainScreen = ({ navigation }) => {
+const MainScreen = ({ navigation: { navigate } }) => {
   const { pictures } = useAppContext();
 
   return (
@@ -27,7 +28,7 @@ const MainScreen = ({ navigation }) => {
             key={item.id}
             style={styles.pictureContainer}
             onPress={() =>
-              navigation.navigate("Picture", {
+              navigate(Routes.Picture, {
                 picture: item,
               })
             }
@@ -39,7 +40,7 @@ const MainScreen = ({ navigation }) => {
       <View style={styles.takePictureButtonContainer}>
         <TouchableOpacity
           style={styles.takePictureButton}
-          onPress={() => navigation.navigate("TakePicture")}
+          onPress={() => navigate(Routes.TakePicture)}
         >
           <Text style={styles.takePictureText}>TAKE PICTURE</Text>
         </TouchableOpacity>

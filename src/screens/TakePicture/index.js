@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 
+import * as Routes from "../../routes";
 import { useAppContext } from "../../context";
 import Camera from "../../components/Camera";
 import { styles } from "./styles";
 
-const TakePictureScreen = ({ navigation }) => {
+const TakePictureScreen = ({ navigation: { navigate } }) => {
   const { savePicture } = useAppContext();
   const [saving, setSaving] = useState(false);
 
   const setCapturedPicture = async ({ base64 }) => {
     setSaving(true);
     await savePicture(base64);
-    navigation.navigate("Main");
+    navigate(Routes.Main);
   };
 
   return (

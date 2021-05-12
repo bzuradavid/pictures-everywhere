@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as SplashScreen from "expo-splash-screen";
 
+import * as Routes from "./routes";
 import { options } from "./utils/screenOptions";
 import { AppProvider } from "./context";
 import MainScreen from "./screens/Main";
@@ -10,13 +11,12 @@ import PictureScreen from "./screens/Picture";
 import TakePictureScreen from "./screens/TakePicture";
 
 const Stack = createStackNavigator();
-SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   useEffect(() => {
     setTimeout(async () => {
       await SplashScreen.hideAsync();
-    }, 2000);
+    }, 1000);
   }, []);
 
   return (
@@ -24,17 +24,17 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Main"
+            name={Routes.Main}
             options={options.main}
             component={MainScreen}
           />
           <Stack.Screen
-            name="Picture"
+            name={Routes.Picture}
             options={options.picture}
             component={PictureScreen}
           />
           <Stack.Screen
-            name="TakePicture"
+            name={Routes.TakePicture}
             options={options.takePicture}
             component={TakePictureScreen}
           />
